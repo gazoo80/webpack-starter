@@ -1,0 +1,527 @@
+- Lección 04: Creando un proyecto de Node
+
+- Construyendo una configuración cascarón para proyectos que usarán Webpack
+
+1. Abrir la Terminal de VS Code.
+
+2. En la termina,l escribir cd y arrastrar la carpeta Webpack-inicial creada
+   (OJO: Arrastrarla desde el explorador de Windows). Así nos posicionaremos 
+   dentro de esta carpeta. 
+   C:\Users\HP\source\repos\VideoCursos\Fernando Herrera\JavaScript_Moderno_Dominalo>
+   cd "c:\Users\HP\source\repos\VideoCursos\Fernando Herrera\JavaScript_Moderno_Dominalo\Webpack-Inicial"  
+   * Quedará algo así:
+   c:\Users\HP\source\repos\VideoCursos\Fernando Herrera\JavaScript_Moderno_Dominalo\Webpack-Inicial>
+
+3. Podemos verificar la version de node con: node --version
+
+4. Podemos verificar la versión de npm con : npm --version
+   (npm: node package manager, sirve para gestionar instalación de paquetes)
+
+5. Ingresar npm init. Esto nos creará un archivo package.json. Todas las aplicaciones
+   en Node tienen este archivo. Es primordial. Este archivo nos va a decir cómo
+   funciona la aplicación, qué dependencias son necesarias para pasarlas a producción,
+   que hay que descartar al pasar a producción, etc.
+   - Nombre del paquete. Se puede dejar así o cambiarlo
+     package name: (webpack-inicial)
+   - Versión inicial por defecto
+     version: (1.0.0)
+   - Descripción
+     description: Este es un cascarón de un proyecto de webpack
+   - Punto de entrada de la aplicación
+     entry point: (index.js)
+   - Si hay algún comando para realizar pruebas automáticas se puede definir
+     test command:
+   - Si ya tenemos un repositorio de GIT para el proyecto
+     git repository:
+   - Para encontrar el proyecto en el repositorio de proyectos de Node
+     keywords:
+   - Autor
+     author: Jefferson Zarate
+   - Licencia
+     license: (ISC)
+   * Luego aparece el contenido que tendrá el archivo package.json
+   * Al final aparece la pregunta de confirmación:
+     Is this OK? (yes)
+     Sólo damos Enter
+   * Al terminar se habrá creado en la carpeta Webpack-Inicial
+     el archivo package.json
+
+------------------------------------------------------------------------------------
+
+- Lección 06: Instalación y configuración de Webpack por defecto
+
+1. En la terminal, ubicarse en la carpeta del proyecto. 
+   C:\Users\HP\source\repos\VideoCursos\Fernando Herrera\JavaScript_Moderno_Dominalo>
+   cd Webpack-Inicial
+   C:\Users\HP\source\repos\VideoCursos\Fernando Herrera\JavaScript_Moderno_Dominalo\Webpack-Inicial>
+   Es decir, la carpeta que contiene el archivo package.json
+
+2. Ya en la carpeta indicada ejecutar lo sgte:
+   npm install webpack webpack-cli --save-dev
+   Esto instala webpack y webpack-cli como una dependencia de desarrollo, porque el
+   webpack es algo que no va a ir al servidor, es decir a producción
+   Además en la carpeta del proyecto se crea un carpeta llamada node_modules que
+   contiene todo lo necesario para que webpack funcione bien y que no s ayudará a desarrollar
+  
+3. En el archivo package.json. En la sección scripts incluimos "build": "webpack".
+   Con esto estamos indicando a la aplicación que cuando ejecutemos el comando "build"
+   se ejecutará webpack con su configuración por defecto en el proyecto. Webpack buscará por
+   defecto la carpeta "src", tomará los archivos javascript (js), los minimizará, unificará
+   en uno solo y lo dejará listo para usarlo en producción.
+
+4. En la terminal, siempre en la carpeta del proyecto, ejecutamos lo sgte:
+   npm run build
+   Esto habrá creado, en la carpeta del proyecto, una carpeta llamada dist y dentro de
+   esta un archivo js llamado main.js. Este archivo main.js contiene nuestros archivo js
+   usados en nuestro proyecto unificados y minimizados. Además el codigo de main.js
+   ya está ofuscado, y cargando todo lo necesario para importar módulos, para trabajarlos
+   de manera segura, para proteger el código, etc.
+
+------------------------------------------------------------------------------------------
+
+- Lección 07: Archivo de Configuración del Webpack
+
+1. En la carpeta del proyecto, crear el archivo webpack.config.js
+
+2. En la terminal, estando siempre en la carpeta del proyecto, escribimos lo sgte:
+   npm i -D html-loader html-webpack-plugin
+   Esto instalará, en modo de desarrollo (-D = --save-dev), dos paquetes:
+   html-loader y html-webpack-plugin. El primero moverá el archivo index.html a la
+   carpeta dist y el segundo insertará automáticamente el bundle (main.js) en el
+   index.html.
+  
+3. Crear la configuración correspondiente en webpack.config.js
+
+4. Borramos la carpeta dist para verificar que webpack la vuelve a crear con
+   main.js y index.html (Luego ya no es necesario hacerlo)
+
+5. En la terminal, siempre estando en la carpeta del proyecto, escribimos lo sgte:
+   npm run build
+   Esto generará nuevamente la carpeta dist con todos los cambios ya antes mencionados
+
+6. En index.html aparecerá dos veces insertado main.js.
+   Borramos ambos ya que Webpack creará la inserción del script main.js automáticamente.
+   También borramos la inserción del script en el index.html usado como plantilla.
+   Es decir el que esta en "src/index.html"
+
+7. En la terminal, volvemos a ejecutar: npm run build.
+   Veremos que ahora el index.html que se encuentra en dist tendrá una sola inserción
+   de script main.js
+
+8. Ejecutamos el indx.html que se encuentra en dist y vemos que todo funciona bien.
+
+------------------------------------------------------------------------------------------
+
+- Lección 08: Webpack Dev Server
+  Instalando webpack dev server, automáticamente configuramos para nuestra aplicación
+  un servidor de desarrollo. Por cada cambio que hagamos en la aplicación, simplemente
+  guardamos los cambios y webpack dev server se encargará de hacer automáticamente
+  npm run build y mostrar los cambios hechos usando el servidor de desarrollo. Tiene
+  un funcionamiento similar a Live Server (instalado como plugin de VS Code)  
+
+1. En la terminal, siempre estando en la carpeta del proyecto, escribimos lo sgte:
+   npm i -D webpack-dev-server
+   Esto instalará el servidor de desarrollo de Webpack. Además aparecerá como dependencia
+   en package.json.
+
+2. En el archivo package.json, en la sección scripts colocamos:
+   "start": "webpack serve --open"
+   Con esto le decimos a webpack que apenas se levante el web server, ábrelo.
+   por defecto el servidor de webpack utilizará el puerto 8080. Pero si necesitaríamos
+   utilizar otro puerto, entonces podemos hacer lo sgte:
+   "start": "webpack serve --open --port=8081"
+
+3. En el archivo webpack.config.js, dentro de module.exports creamos la propiedad
+   devServer y dentro contentBase: "./dist":
+   devServer: {
+        contentBase: "./dist"
+   }
+   Aunque quizá no es necesario. Herrera no lo hizo, lo probé sin eso e igual funcionó
+
+4. En la terminal escribimos: npm start
+   Esto iniciará el servidor de desarrollo de webpack. En adelante, al hacer cambios, 
+   simplemente necesitamos guardarlos y el servidor de webpack se encargará de hacer
+   npm run build automáticamente para que los cambios tomen efecto y lanzará la página
+   index.html debidamente actualizada.
+   NOTA: No cerrar la terminal, pues terminaríamos el proceso que hace que el 
+   servidor de webpack se esté ejecutando. Mantenerla abierta.
+
+----------------------------------------------------------------------------------------
+
+- Lección 09: Importando estilos de forma dinámica
+  Las 2 formas más comunes para trabajar con estilos son:
+  a. Cargas estilos de forma dinámica
+  b. Tener estilos globales
+
+1. Creamos en src la carpeta css y en esta carpeta crear la hoja de estilos
+   componentes.css
+
+2. En la terminal, siempre estando en la carpeta del proyecto, instalamos dos paquetes
+   en las dependencias del proyecto. Escribimos lo sgte:
+   npm i -D css-loader style-loader
+   Estos dos paquetes permitirán que webpack lea, minimize e inyecte el archivo de
+   estilos componentes.css dentro de nuestro bundle.
+   Una vez instalados aparecerán como dependencias de desarrollo en el archivo
+   package.json
+
+3. En el archivo componentes.js importamos el archivo css que vamos a necesitar
+   import "../css/componentes.css";
+
+4. Realizamnos la configuración correspondiente en webpack.config.js
+   Añadimos una nueva regla:
+   {
+       test: /\.css$/i,
+       use: ["style-loader", "css-loader"]
+   }
+
+5. Para comprobar que todo ha funcionado bien, eliminamos la carpeta dist y
+   ejecutamos en la terminal: npm run build
+   Se creará la carpeta dist conteniendo index.html y main.js. Pero no se encuentra
+   componentes.css.
+   Lo que sucede es que componentes.css fue importado en componentes.js
+   Cuando webpack requiera componentes.js para construir el bundle se activará la 
+   importación de componentes.css y se incluirá en main.js
+
+6. Abrimos dist/index.html desde el explorador de windows. Vemos que todo funciona
+   bien. Las letras aparecen en color rojo, aplicando el estilo creado.
+
+7. Ahora levantamos el servidor de webpack con npm start. Vemos que también funciona
+   con el estilo aplicado. Podemos cambiar los estilos en componentes.css, grabamos
+   y los cambios serán aplicados automáticamente por el servidor de webpack
+
+----------------------------------------------------------------------------------------
+
+- Lección 10: Creando un archivo de estilos de forma global en la app
+
+1. Creamos en la carpeta src el archivo de estilos styles.css
+   Lo que queremos es que webpack coloque styles.css en dist como un archivo
+   independiente y que además lo inserte en index.html
+
+2. Si el servidor de webpack está corriendo, detenerlo haciendo clic en el ícono
+   del tachito (kill terminal) o haciendo Ctrl + c --> S.
+   Ahora procedemos a instalar un paquete para hacer el trabajo. Escribimos lo sgte:
+   npm i -D mini-css-extract-plugin
+   Esto instalará el paquete que hará el trabajo
+
+3. En webpack.config.js añadimos unas lineas de configuración:
+   a. Añadimos una constante para requerir el paquete
+      const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+   b. Añadimos una nueva regla
+      {
+           test: /styles\.css$/i,
+           use: [MiniCssExtractPlugin.loader, "css-loader"]
+      }
+
+   c. En la otra regla sobre archivos css agregamos una exclusión
+      exclude: /styles\.css$/i,
+
+   d. En la sección plugins incluimos una instancia del plugin con el q trabajaremos
+      new MiniCssExtractPlugin({
+         filename: "[name].css",
+         ignoreOrder: false
+      })
+
+4. Hacemos un import al archivo styles.css en el archivo js principal index.js
+   import "./styles.css";
+
+5. En la terminal ejecutamos npm run build.
+   El archivo styles.css se moverá a la carpeta dist como main.css. Además será
+   insertado en index.html <link href="main.css" rel="stylesheet">
+
+6. Abrimos dist/index.html desde el explorador de windows. Vemos que todo funciona
+   bien. Las letras aparecen en color rojo y el fondo en color gris, aplicando los
+   estilos creados de forma dinámica como los del archivo global de estilos.
+
+7. Ahora levantamos el servidor de webpack con npm start. Vemos que también funciona
+   con los estilos aplicados.
+
+* OPCIONAL: Minimizar el contenido del archivo main.css
+            Generalmente un procedimiento que se hace para producción
+         
+1. Si el servidor de webpack está corriendo, detenerlo.
+   Ahora procedemos a ejecutar en la terminal lo sgte:
+   npm i -D optimize-css-assets-webpack-plugin
+   Esto instalará el paquete que hará el trabajo
+
+2. En webpack.config.js añadimos unas lineas de configuración:
+   a. Añadimos una constante para requerir el paquete
+      const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
+   b. En module.exports añadimos:
+      optimization: {
+          minimizer: [ new OptimizeCssAssetsPlugin() ]
+      }
+
+   c. En module.exports cambiamos el modo a producción
+      mode: "production"
+
+3. En la terminal ejecutamos npm run build.
+   En la carpeta dist, el archivo main.css aparecerá minimizado, es decir sin 
+   espacios, sin indentación, sin comentarios, etc.
+
+   NOTA: Este procedimiento se hace generalmente para producción no en entorno de 
+         desarrollo.
+
+-------------------------------------------------------------------------------------------
+
+- Lección 11: Manejo de imágenes
+
+1. Dentro de la carpeta src creamos otra carpeta llamada assets.
+   Movemos cualquier imagen dentro de esta carpeta.
+
+2. En el archivo src/index.html colocar un tag img para poder visualizar la imagen
+   <img src="./assets/Excavator.png" alt="Excavadora" >
+
+3. En la terminal, siempre estando en la carpeta del proyecto, ejecutar lo sgte:
+   npm i copy-webpack-plugin --save-dev
+   Esto instalará el paquete que usaremos para mover cualquier asset (en este caso
+   una imagen). Son recursos estáticos que se moverán tal y como están.
+
+4. En webpack.config.js añadimos unas lineas de configuración:
+   a. Añadimos una constante para requerir el paquete
+      const CopyWpPlugin = require("copy-webpack-plugin");
+
+   b. En la sección plugins incluimos una instancia del plugin con el q trabajaremos
+      new CopyWpPlugin({
+            patterns: [
+                { from: "src/assets", to: "assets/" }
+            ]
+      })
+
+5. Si el servidor de webpack está en ejecución, detenerlo.
+   En la terminal ejecutamos npm run build.
+   Moveremos todo la carpeta src/assets con todo su contenido a dist. Al final
+   tendremos dist/assets
+
+6. Abrimos dist/index.html desde el explorador de windows. Vemos que todo funciona
+   bien. Se muestra la imagen que se encuentra en dist/assets. Levantando el servidor
+   de webpack también podemos ver que funciona bien.
+
+-------------------------------------------------------------------------------------------
+
+- Lección 12: Modo producción
+
+1. En la carpeta del proyecto creamos un nuevo archivo de configuración que lo 
+   usaremos para producción: webpack.prod.js
+
+2. En el archivo webpack.prod.js, en module.exports, cambiamos el modo a producción
+   mode: "production"
+
+3. En module.exports añadimos:
+   output: { 
+        filename: "main.abc.js"
+   }
+   Con esto configuramos manualmente el nombre del archivo de salida. Ahora podemos
+   incluirle, por ejemplo, un hash
+
+4. En el archivo package.json, en la sección scripts, editamos el comando build
+   "build": "webpack --config webpack.prod.js"
+   Cuando el comando era solo "build": "webpack" (en desarrollo), Webpack buscará
+   por defecto el archivo webpack.config.js.
+   Si queremos que "build" ejecute otro archivo de configuración tenemos que
+   especificarlo.
+
+5. Si nosotros no quisiéramos perder nuestros archivos originales (no minimizados, con
+   comentarios, etc.) para usarlos en un ambiente de pre-producción o test, por ejemplo.
+   Entonces podemos crear, en package.json, otro comando que ejecute el config por defecto:
+   "build:dev": "webpack --config webpack.config.js" o
+   "build:dev": "webpack"
+
+6. Si queremos que el archivo main.js cambie de nombre cuando hemos hecho cambios en
+   la aplicación y el navegador del cliente vuelva a cargar el archivo para tener la
+   última versión del archivo y la aplicación. En webpack.prod.js, agregamos en el
+   filename un hash:
+   output: { 
+        filename: "main.[contenthash].js"
+   } 
+
+7. Si queremos aplicar también el hash al nombre del archivo css. Hacemos lo sgte
+   en la sección plugins:
+   new MiniCssExtractPlugin({
+         filename: "[name].[contenthash].css", 
+         ignoreOrder: false
+   }),
+
+8. En todo momento podemos ejecutar "npm run build" para ir verificando que se
+   realizan los cambios deseados.
+
+-------------------------------------------------------------------------------------------
+
+- Lección 13: Instalación y configuración de Babel
+  
+  Problemática: Puede darse el caso que una aplicación que esta hecha con código
+  moderno de javascript, ES6, ES7, etc. (const, destructuración, nuevas funciones de
+  Arrays, etc.) no pueda ser entendido y ejecutado por navegadores antiguos. Para
+  darle solución a esto utilizamos Babel.
+  https://babeljs.io/setup#installation
+
+1. En la terminal, siempre en la carpeta del proyecto, ejecutar lo sgte:
+   npm install --save-dev babel-loader @babel/core    o
+   npm i -D babel-loader @babel/core
+   Esto instalará Babel 
+
+2. En el archivo webpack.prod.js, en la sección module, creamos una nueva regla
+   para utilizar Babel:
+   {
+         test: /\.m?js$/, //Aplica esta regla solo a archivos js
+         exclude: /node_modules/,
+         use: {
+               loader: "babel-loader"
+         } O
+         use: ["babel-loader"]
+   }
+
+3. Creamos el archivo de configuración de Babel babel.config.json donde configuraremos
+   los presets, plugins, etc. que Babel usará.
+
+4. Instalaremos un paquete que transformará la sintaxis javascript (código más moderno)
+   a una sintaxis javascript más soportada por todos los navegadores (ej: ES5).
+   https://babeljs.io/docs/en/babel-preset-env
+
+   a. En la terminal ejecutamos lo sgte:
+      npm install --save-dev @babel/preset-env
+
+   b. En el archivo babel.config.json agregamos:
+      {
+         "presets": ["@babel/preset-env"]
+      }
+
+   c. En el archivo webpack.prod.js, en la regla de Babel, agregamos opciones
+      con los presets que se van a utilizar:
+      options: {
+            presets: ["@babel/preset-env"]
+      }
+
+5. Eliminamos la carpeta dist. En la terminal ejecutamos npm run build.
+   Vemos que el código de main.js ha cambiado. Por ejemplo tipos para declarar
+   variables como const y let han sido reemplazadas por var.
+
+6. Ahora instalaremos un paquete que, en teoría, ofuscará y minimizará el código.
+   Es decir el código estará en una sola linea (sin espacios, comentarios, etc.)
+   https://babeljs.io/docs/en/babel-preset-minify
+
+   a. En la terminal ejecutamos lo sgte:
+      npm install babel-preset-minify --save-dev
+
+   b. En el archivo babel.config.json agregamos:
+      {
+         "presets": ["minify"]
+      }
+
+   c. En el archivo webpack.prod.js, en la regla de Babel, agregamos opciones
+      con los presets que se van a utilizar:
+      options: {
+            presets: ["@babel/preset-env", "minify"]
+      }
+
+7. Eliminamos la carpeta dist. En la terminal ejecutamos npm run build.
+   Vemos que el código de main.js no ha cambiado mucho (por lo que no se si en
+   realidad este paquete sea necesario). Sólo se ofuscaron y minimizaron las 
+   funciones creadas manualmente. Las funciones creadas automáticamente por webpack
+   siguen igual.
+
+8. Ahora instalaremos un plugin que SÎ ofuscará y minimizará el código.
+   Es decir, todo el código estará en una sola linea (sin espacios, comentarios, etc.)
+   https://webpack.js.org/plugins/terser-webpack-plugin/
+   En el video curso, F. Herrera utiliza otro llamado Babel Minify Webpack Plugin
+   pero en su misma página de GitHub dicen que el plugin está deprecado por falta
+   de soporte y recomiendan usar Terser Webpack Plugin
+
+   a. En la terminal ejecutamos lo sgte:
+      npm install terser-webpack-plugin --save-dev
+
+   b. En el archivo webpack.prod.js agregamos una nueva constante requiriendo 
+      el plugin
+      const TerserPlugin = require("terser-webpack-plugin");
+
+   c. En el archivo webpack.prod.js, en la sección "optimization" agregamos la
+      sgte configuración:
+      optimization: {
+         minimize: true,
+         minimizer: [ 
+            new OptimizeCssAssetsPlugin(), //Plugin para minimizar main.css (otra lección)
+            new TerserPlugin() //plugin para minimizar main.js
+         ]
+      }
+
+9. Eliminamos la carpeta dist. En la terminal ejecutamos npm run build. 
+   Ahora sí vemos que todo el código de main.js se ofuscó y minimizó.
+   Todo el código está en una sola linea sin indentación, espacios, comentarios, etc.
+
+10. Investigando, encontré que en el archivo webpack.config.js en la sección 
+    output, podemos utilizar la propiedad environment que recibe un objeto con
+    varias opciones mediante las cuales le decimos a webpack que características de
+    ES pueden ser usadas en el archivo creado en tiempo de ejecución main.js
+    (Por ejm: funciones de flecha, const, let, destructuración, modulos, etc.)
+    output: { 
+        filename: "main.[contenthash].js", //De otra lección
+        environment: {
+            arrowFunction: false
+        }
+    }
+
+    Hay otra propiedad mediante la cual le podemos decir a webpack que añada o no
+    una función autoinvocda alrededor del código emitido
+    output: {
+        iife: true //o false
+    }
+    
+    https://webpack.js.org/configuration/output/#outputenvironment
+            
+-------------------------------------------------------------------------------------------
+
+- Lección 14: Limpiando la carpeta dist
+
+Vamos a limpiar la carpeta dist automáticamente para que cuando se haga npm run build
+se generen en esta carpeta solo los archivos usados por la aplicación.
+OJO: Los archivos solo se actualizarán si hay cambios, sino se mantendrán los mismos
+https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
+
+1. En la terminal, siempre en la carpeta del proyecto, ejecutamos lo sgte:
+   npm i -D clean-webpack-plugin
+   Esto instalará el plugin que hará el trabajo.
+
+2. En el archivo webpack.prod.js hacemos algunas configuraciones:
+   OJO: Esto también podemos hacerlo en el archivo de configuración por defecto,
+   con el que trabajamos en desarrollo webpack.config.js
+
+   a. Añadimos una constante para requerir el paquete
+      const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+   b. Añadimos una constante para requerir la ruta
+      const path = require('path');
+
+   c. En la sección output le damos valor a la propiedad path
+      path: path.resolve(process.cwd(), 'dist')
+
+   d. En la sección plugins incluimos una instancia del plugin con el q trabajaremos
+      new CleanWebpackPlugin()
+
+   NOTA: F. Herrera, en su curso, no realizó  los pasos b y c, y sí le funcionó.
+   A mí no me funcionó y tuve que hacer esos pasos adicionales encontrados en:
+   https://www.npmjs.com/package/clean-webpack-plugin
+
+3. Ahora hacemos algunos cambios y probamos ejecutando npm run build. Los archivos 
+   main.js y main.css van variando según los cambios que se hagan en al app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
