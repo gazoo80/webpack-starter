@@ -626,6 +626,31 @@ Javascript
 1. Ya que dist no se va a subir a Git porque así lo configuramos en gitignore.
    Vamos a renombrar la carpeta y le vamos a poner "docs"
 
+2. En la terminal ejecutamos git status.
+   Este comando nos dirá que tenemos un nuevo directorio llamado docs al cual no se
+   le esta haciendo seguimiento y nos recomienda que hagamos git ad y git commit
+
+3. Le decimos a GIT que le haga seguimiento a la carpeta docs para poder subirla al
+   repositorio. Ejecutamos:
+   git add .
+   git commit -m "docs creado"
+   git push
+
+4. Recargamos la página de nuestro repositorio y vemos que ya aparece la carpeta docs
+
+5. En la página de nuestro repositorio vamos a Settings y luego a la sección
+   GitHub Pages.
+
+   a. Seleccionamos el branch (master) en el que está nuestra fuente de publicación (docs)
+
+   b. Seleccionamos la fuente de publicación (la carpeta docs)
+
+   c. Hacemos clic en Save
+
+6. En la misma sección aparecerá un mensaje que nos indica que GitHub publicará el sitio.
+   Pero hay que esperar un momento, recargamos la página y recién cuando 
+   aparezca el mensaje: Your site is published at https://gazoo80.github.io/webpack-starter/
+   ya podemos ingresar a ver el sitio siguiendo el link generado
 
 
 
