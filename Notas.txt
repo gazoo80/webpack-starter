@@ -594,7 +594,7 @@ Sección 09 - Despliegue a GitHub y GitHub Pages
    c. Ahora actualizamos la página que apareció inicialmente en nuestra cuenta de GitHub
       Vemos que nuestros archivos ya estan en nuestro repositorio en la nube
 
-4. Ahora vamos a creau un archivo README.md
+4. Ahora vamos a crear un archivo README.md
    Este archivo sirve para colocar información acerca de lo que hace o como funciona
    el proyecto que se encuentra en el repositorio
 
@@ -614,7 +614,7 @@ Sección 09 - Despliegue a GitHub y GitHub Pages
 
       III. git push
 
-
+Repositorio: https://github.com/gazoo80/webpack-starter
 
 
 
