@@ -584,7 +584,35 @@ Sección 09 - Despliegue a GitHub y GitHub Pages
       En la terminal de VS Code, siempre estando en la carpeta del proyecto, ejecutamos:
       git remote add origin https://github.com/gazoo80/webpack-starter.git
 
-      
+   b. Subimos el proyecto y todos sus cambios a nuestro repositorio.
+      NOTAs: Master es la rama principal
+             -u lo que hace es establecer "origin" como muestro repositorio en la nube por defecto
+      Ejecutamos: git push -u origin master
+      Aparece una ventana en el explorador solicitando la constraseña de tu cuenta de GitHub
+      Ingresamos la contraseña y vemos como van subiendo los archivos.
+   
+   c. Ahora actualizamos la página que apareció inicialmente en nuestra cuenta de GitHub
+      Vemos que nuestros archivos ya estan en nuestro repositorio en la nube
+
+4. Ahora vamos a creau un archivo README.md
+   Este archivo sirve para colocar información acerca de lo que hace o como funciona
+   el proyecto que se encuentra en el repositorio
+
+   a. Creamos en la carpeta del proyecto el archivo README.md (md = mark down)
+      Es parecido al HTML pero muy simplificado
+
+   b. Para poder ver el preview de lo que vamos haciendo en README.md hacemos clic 
+      derecho en el mouse y seleccionamos command palette. Luego buscamos
+      Markdown Open Preview. Escribimos el contenido de README.md 
+
+   c. Vamos a subir al repositorio los cambios que se hayan hecho y los nuevos
+      archivos que se hayan creado
+
+      I. git add .
+
+      II. git commit -m "Readme creado"
+
+      III. git push
 
 
 
