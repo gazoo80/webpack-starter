@@ -504,9 +504,87 @@ https://webpack.js.org/guides/output-management/#cleaning-up-the-dist-folder
 
 3. Ahora hacemos algunos cambios y probamos ejecutando npm run build. Los archivos 
    main.js y main.css van variando según los cambios que se hagan en al app
+            
+-------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------
+Sección 09 - Despliegue a GitHub y GitHub Pages
 
+- Lección 04: Configuración de Git en nuestro equipo
 
+1. Descargamos GIT desde su página oficial https://git-scm.com/
+   Instalamos la versión para windows
 
+2. Nos guiamos de la hoja de referencia para GitHub y Git que también podemos encontrar en la
+   página de GIT (Se puede descargar como PDF)
+
+3. Abrimos la ventana de comandos de windows (CMD) o también podemos utilizar Git Bash que 
+   se instala al momento de instalar GIT y que tiene un entorno más parecido a la ventana de 
+   comandos de Linux. Incluso, podríamos utilizar también la terminal de VS Code. 
+   Y hacemos las configuraciones:
+
+   Configura la información del usuario para todos los respositorios locales
+   $ git config --global user.name "Jefferson"
+
+   Establece el nombre que desea esté anexado a sus transacciones de commit
+   $ git config --global user.email "jzo2102@gmail.com"
+
+   Establece el e-mail que desea esté anexado a sus transacciones de commit
+   $ git config --global color.ui auto
+   Habilita la útil colorización del producto de la línea de comando
+
+   NOTA: Se escribe a partir de git config. Sin el $
+
+4. Ahora vamos a la terminal de VS code y ahí crearemos nuestro repositorio, que en este caso
+   será nuestro proyecto Webpack-Inicial
+   Estando en la carpeta del proyecto Webpack-Inicial ejecutamos:
+   git init
+   Esto iniciará el repositorio Git en nuestro proyecto
+
+5. Creamos un archivo de configuración llamado .gitignore
+   En este archivo le decimos a GIT de que archivos y carpetas no debe estar pendiente en cuanto
+   a los cambios que sufran. Escribimos:
+   
+   node_modules/
+   dist/ 
+
+   Vemos que al guardar los cambios los nombres de las carpetas y su contenido se colocan de 
+   color gris. Esto indica que GIT ya no les está haciendo seguimiento.
+
+6. Ahora en la terminal ejecutamos el sgte comando:
+   git add .
+   Con esto le decimos a GIT que se prepare para tomarle una foto a todos los archivos de mi proyecto
+   Esa "fotografía" nos ayudará a recuperar nuestros archivos en el futuro tal y como estaban en un
+   específico punto del tiempo. Así podemos hacer comparaciones, seguimientos, etc.
+
+7. Para tomar dicha "fotografía" de nuestro proyecto, ejecutamos el sgte comando:
+   git commit -m "Primer commit"
+
+8. Podríamos borrar la carpeta src de nuestro proyecto. Pero luego escribiendo lo sgte en la
+   terminal podemos recuperar dicha carpeta:
+   git checkout -- .
+
+-----------------------------------------------------------------------------------------
+
+- Lección 05: Desplegar el proyecto a GitHub
+
+1. En la página de GitHub https://github.com/ nos logueamos con nuestra cuenta.
+
+2. Crear un nuevo repositorio haciendo clic en el botón verde o en el signo "+" y
+   seleccionando "New repository"
+
+   a. Nombre del repositorio: webpack-starter
+
+   b. Descripción: Este es el cascarón de mis aplicaciones que usen webpack
+
+   c. Clic en Crear repositorio
+
+3. Ahora aparecerán unos pasos para poder realizar el despliegue
+
+   a. Agregamos un origen remoto a nuestro repositorio.
+      En la terminal de VS Code, siempre estando en la carpeta del proyecto, ejecutamos:
+      git remote add origin https://github.com/gazoo80/webpack-starter.git
+
+      
 
 
 
