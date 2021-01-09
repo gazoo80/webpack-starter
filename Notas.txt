@@ -616,7 +616,15 @@ Sección 09 - Despliegue a GitHub y GitHub Pages
 
 Repositorio: https://github.com/gazoo80/webpack-starter
 
+-----------------------------------------------------------------------------------------
 
+- Lección 06: GitHub Pages
+
+Es un hosting gratuito que nos ofrece Git para proyectos que sólo sean HTML, CSS y
+Javascript
+
+1. Ya que dist no se va a subir a Git porque así lo configuramos en gitignore.
+   Vamos a renombrar la carpeta y le vamos a poner "docs"
 
 
 
