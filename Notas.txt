@@ -138,7 +138,7 @@
    }
    Aunque quizá no es necesario. Herrera no lo hizo, lo probé sin eso e igual funcionó
 
-4. En la terminal escribimos: npm start
+4. En la terminal escribimos: npm run start
    Esto iniciará el servidor de desarrollo de webpack. En adelante, al hacer cambios, 
    simplemente necesitamos guardarlos y el servidor de webpack se encargará de hacer
    npm run build automáticamente para que los cambios tomen efecto y lanzará la página
